@@ -40,7 +40,7 @@ sf2d_texfmt _mod_sf2d_get_texfmt(mp_int_t format) {
 }
 
 sf2d_place _mod_sf2d_get_place(mp_int_t place) {
-    if (place >= SF2D_PLACE_RAM && place <= SF2D_PLACE_TEMP) {
+    if (place >= SF2D_PLACE_RAM && place <= SF2D_PLACE_VRAM) {
         return place;
     }
 
@@ -350,8 +350,7 @@ STATIC const mp_rom_map_elem_t mp_module_sf2d_globals_table[] = {
 
         // sf2d_place
         LOCAL_INT(PLACE_RAM, SF2D_PLACE_RAM),
-        LOCAL_INT(PLACE_VRAM, SF2D_PLACE_VRAM),
-        LOCAL_INT(PLACE_TEMP, SF2D_PLACE_TEMP),
+        LOCAL_INT(PLACE_VRAM, SF2D_PLACE_VRAM)
 };
 
 STATIC MP_DEFINE_CONST_DICT(mp_module_sf2d_globals, mp_module_sf2d_globals_table);

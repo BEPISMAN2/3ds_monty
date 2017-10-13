@@ -130,15 +130,20 @@ STATIC void mod_sf2d_RenderTarget_attr(mp_obj_t self_in, qstr attr, mp_obj_t *de
         if (load) {
             dest[0] = self->texture;
         }
-    } else if (!strcmp(name, qstr_str(MP_QSTR_width))) {
+    } 
+
+    // doesn't account for the updated struct in sf2d
+    /*
+    else if (!strcmp(name, qstr_str(MP_QSTR_width))) {
         if (load) {
-            dest[0] = mp_obj_new_int(self->target->texture.width);
+            dest[0] = mp_obj_new_int(self->texture.width);
         }
     } else if (!strcmp(name, qstr_str(MP_QSTR_height))) {
         if (load) {
-            dest[0] = mp_obj_new_int(self->target->texture.height);
+            dest[0] = mp_obj_new_int(self->texture.height);
         }
     }
+    */
 }
 
 STATIC const mp_map_elem_t mod_sf2d_RenderTarget_locals_dict_table[] = {

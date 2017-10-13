@@ -20,7 +20,7 @@ static int _mod_citrus_nfc_is_init = 0;
 STATIC mp_obj_t mod_citrus_nfc_init(void) {
     INIT_ONCE(_mod_citrus_nfc_is_init);
 
-    return mp_obj_new_int(nfcInit());
+    return mp_obj_new_int(nfcInit(NFC_OpType_RawNFC));
 }
 
 mp_obj_t mod_citrus_nfc_exit(void) {
@@ -31,6 +31,7 @@ mp_obj_t mod_citrus_nfc_exit(void) {
     return mp_const_none;
 }
 
+/*
 STATIC mp_obj_t mod_citrus_nfc_start_communication(void) {
     return mp_obj_new_int(NFC_StartCommunication());
 }
@@ -38,38 +39,41 @@ STATIC mp_obj_t mod_citrus_nfc_start_communication(void) {
 STATIC mp_obj_t mod_citrus_nfc_stop_communication(void) {
     return mp_obj_new_int(NFC_StopCommunication());
 }
+*/
 
 STATIC mp_obj_t mod_citrus_nfc_start_tag_scan(size_t n_args, const mp_obj_t *args) {
     u16 unknown = 0;
     if (n_args == 1) {
         unknown = mp_obj_get_int(args[0]);
     }
-    return mp_obj_new_int(NFC_StartTagScanning(unknown));
+    return mp_obj_new_int(nfcStartScanning(NFC_STARTSCAN_DEFAULTINPUT));
 }
 
 STATIC mp_obj_t mod_citrus_nfc_stop_tag_scan(void) {
-    return mp_obj_new_int(NFC_StopTagScanning());
+    nfcStopScanning();
+
+    return mp_const_none;
 }
 
 STATIC mp_obj_t mod_citrus_nfc_load_amiibo_data(void) {
-    return mp_obj_new_int(NFC_LoadAmiiboData());
+    return mp_obj_new_int(nfcLoadAmiiboData());
 }
 
 STATIC mp_obj_t mod_citrus_nfc_reset_tag_scan(void) {
-    return mp_obj_new_int(NFC_ResetTagScanState());
+    return mp_obj_new_int(nfcResetTagScanState());
 }
 
 STATIC mp_obj_t mod_citrus_nfc_get_tag_state(void) {
     u8 out;
-    NFC_GetTagState(&out);
+    nfcGetTagState(&out);
 
     return mp_obj_new_int(out);
 }
 
 METHOD_OBJ(init);
 METHOD_OBJ(exit);
-METHOD_OBJ(start_communication);
-METHOD_OBJ(stop_communication);
+//METHOD_OBJ(start_communication);
+//METHOD_OBJ(stop_communication);
 METHOD_OBJ_VAR(0, 1, start_tag_scan);
 METHOD_OBJ(stop_tag_scan);
 METHOD_OBJ(load_amiibo_data);
@@ -83,8 +87,8 @@ STATIC const mp_rom_map_elem_t mp_module_citrus_nfc_globals_table[] = {
         // Functions
         LOCAL_METHOD(init),
         LOCAL_METHOD(exit),
-        LOCAL_METHOD(start_communication),
-        LOCAL_METHOD(stop_communication),
+        //LOCAL_METHOD(start_communication),
+        //LOCAL_METHOD(stop_communication),
         LOCAL_METHOD(start_tag_scan),
         LOCAL_METHOD(stop_tag_scan),
         LOCAL_METHOD(load_amiibo_data),

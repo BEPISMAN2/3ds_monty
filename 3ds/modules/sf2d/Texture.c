@@ -146,6 +146,7 @@ STATIC mp_obj_t mod_sf2d_Texture_bind_color(mp_obj_t self_in, mp_obj_t unit, mp_
     return mp_const_none;
 }
 
+/*
 STATIC mp_obj_t mod_sf2d_Texture_bind_parameters(mp_obj_t self_in, mp_obj_t unit, mp_obj_t params) {
     SELF(self_in);
 
@@ -156,6 +157,7 @@ STATIC mp_obj_t mod_sf2d_Texture_bind_parameters(mp_obj_t self_in, mp_obj_t unit
 
     return mp_const_none;
 }
+*/
 
 STATIC mp_obj_t mod_sf2d_Texture_set_params(mp_obj_t self_in, mp_obj_t params) {
     SELF(self_in);
@@ -323,9 +325,7 @@ STATIC mp_obj_t mod_sf2d_Texture_draw_quad_uv(size_t n_args, const mp_obj_t *arg
     float u1 = mp_obj_get_float(args[7]);
     float v1 = mp_obj_get_float(args[8]);
 
-    unsigned int params = mp_obj_get_int(args[9]);
-
-    sf2d_draw_quad_uv(self->tex, left, top, right, bottom, u0, v0, u1, v1, params);
+    sf2d_draw_quad_uv(self->tex, left, top, right, bottom, u0, v0, u1, v1);
     return mp_const_none;
 }
 
@@ -363,7 +363,7 @@ METHOD_OBJ_N(1, __del__);
 METHOD_OBJ_VAR_N(4, fill_from_rgba8);
 METHOD_OBJ_N(2, bind);
 METHOD_OBJ_N(3, bind_color);
-METHOD_OBJ_N(3, bind_parameters);
+//METHOD_OBJ_N(3, bind_parameters);
 METHOD_OBJ_N(2, set_params);
 METHOD_OBJ_N(1, get_params);
 METHOD_OBJ_KW(3, draw);
@@ -387,7 +387,7 @@ STATIC void mod_sf2d_Texture_attr(mp_obj_t self_in, qstr attr, mp_obj_t *dest) {
     else ATTR_METHOD(fill_from_rgba8)
     else ATTR_METHOD(bind)
     else ATTR_METHOD(bind_color)
-    else ATTR_METHOD(bind_parameters)
+    //else ATTR_METHOD(bind_parameters)
     else ATTR_METHOD(set_params)
     else ATTR_METHOD(get_params)
     else ATTR_METHOD(draw)
@@ -414,7 +414,7 @@ STATIC const mp_map_elem_t mod_sf2d_Texture_locals_dict_table[] = {
         LOCAL_METHOD(fill_from_rgba8),
         LOCAL_METHOD(bind),
         LOCAL_METHOD(bind_color),
-        LOCAL_METHOD(bind_parameters),
+        //LOCAL_METHOD(bind_parameters),
         LOCAL_METHOD(set_params),
         LOCAL_METHOD(get_params),
         LOCAL_METHOD(draw),

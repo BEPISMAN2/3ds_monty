@@ -16,7 +16,10 @@ extern const mp_obj_type_t mod_citrus_apt_Hook_type;
 
 static int _mod_citrus_apt_is_init = 0;
 
-STATIC APT_AppStatus _mod_citrus_apt_get_app_status(mp_obj_t status) {
+// TODO:  Good job dumbass, you stubbed all the functions
+// Re-Implement them using modern ctrulib later
+STATIC mp_obj_t _mod_citrus_apt_get_app_status(mp_obj_t status) {
+	/*
     if (mp_obj_is_integer(status)) {
         int _status = mp_obj_get_int(status);
         if (_status >= APP_NOTINITIALIZED && _status <= APP_APPLETCLOSED) {
@@ -24,80 +27,103 @@ STATIC APT_AppStatus _mod_citrus_apt_get_app_status(mp_obj_t status) {
         }
     }
     nlr_raise(mp_obj_new_exception(&mp_type_TypeError));
+    */
+
+    return mp_const_none;
 }
 
 STATIC mp_obj_t mod_citrus_apt_init(void) {
+    /*
     INIT_ONCE(_mod_citrus_apt_is_init);
 
     return mp_obj_new_int(aptInit());
+    */
+
+    return mp_const_none;
 }
 
 mp_obj_t mod_citrus_apt_exit(void) {
+    /*
     EXIT_ONCE(_mod_citrus_apt_is_init);
 
     aptExit();
 
     return mp_const_none;
+    */
+
+    return mp_const_none;
 }
 
 STATIC mp_obj_t mod_citrus_apt_open_session(void) {
+    /*
     aptOpenSession();
+
+    return mp_const_none;
+    */
 
     return mp_const_none;
 }
 
 STATIC mp_obj_t mod_citrus_apt_close_session(void) {
-    aptCloseSession();
+    //aptCloseSession();
 
     return mp_const_none;
 }
 
 STATIC mp_obj_t mod_citrus_apt_set_status(mp_obj_t status) {
+    /*
     APT_AppStatus _status = _mod_citrus_apt_get_app_status(status);
     aptSetStatus(_status);
+    */
 
     return mp_const_none;
 }
 
 STATIC mp_obj_t mod_citrus_apt_get_status(void) {
-    return mp_obj_new_int(aptGetStatus());
+    //return mp_obj_new_int(aptGetStatus());
+    return mp_const_none;
 }
 
 STATIC mp_obj_t mod_citrus_apt_get_status_power(void) {
-    return mp_obj_new_int(aptGetStatusPower());
+    //return mp_obj_new_int(aptGetStatusPower());
+    return mp_const_none;
 }
 
 STATIC mp_obj_t mod_citrus_apt_set_status_power(mp_obj_t status) {
+    /*
     u32 _status = mp_obj_get_int(status);
     aptSetStatusPower(_status);
+    */
 
     return mp_const_none;
 }
 
 STATIC mp_obj_t mod_citrus_apt_return_to_menu(void) {
-    aptReturnToMenu();
+    //aptReturnToMenu();
 
     return mp_const_none;
 }
 
 STATIC mp_obj_t mod_citrus_apt_wait_status_event(void) {
-    aptWaitStatusEvent();
+    //aptWaitStatusEvent();
 
     return mp_const_none;
 }
 
 STATIC mp_obj_t mod_citrus_apt_signal_ready_for_sleep(void) {
-    aptSignalReadyForSleep();
+    //aptSignalReadyForSleep();
 
     return mp_const_none;
 }
 
 STATIC mp_obj_t mod_citrus_apt_get_menu_app_id(void) {
-    return mp_obj_new_int(aptGetMenuAppID());
+    //return mp_obj_new_int(aptGetMenuAppID());
+    return mp_const_none;
 }
 
 STATIC mp_obj_t mod_citrus_apt_main_loop(void) {
-    return mp_obj_new_bool(aptMainLoop());
+    //return mp_obj_new_bool(aptMainLoop());
+    return mp_const_none;
 }
 
 METHOD_OBJ_N(0, init);
@@ -134,8 +160,9 @@ STATIC const mp_rom_map_elem_t mp_module_citrus_apt_globals_table[] = {
         LOCAL_METHOD(wait_status_event),
         LOCAL_METHOD(signal_ready_for_sleep),
         LOCAL_METHOD(get_menu_app_id),
-        LOCAL_METHOD(main_loop),
+        LOCAL_METHOD(main_loop)//,
 
+        /*
         // NS_APPID
         LOCAL_INT(APPID_HOMEMENU, APPID_HOMEMENU),
         LOCAL_INT(APPID_CAMERA, APPID_CAMERA),
@@ -187,6 +214,7 @@ STATIC const mp_rom_map_elem_t mp_module_citrus_apt_globals_table[] = {
         LOCAL_INT(HOOK_ONWAKEUP, APTHOOK_ONWAKEUP),
         LOCAL_INT(HOOK_ONEXIT, APTHOOK_ONEXIT),
         LOCAL_INT(HOOK_COUNT, APTHOOK_COUNT),
+        */
 };
 
 STATIC MP_DEFINE_CONST_DICT(mp_module_citrus_apt_globals, mp_module_citrus_apt_globals_table);

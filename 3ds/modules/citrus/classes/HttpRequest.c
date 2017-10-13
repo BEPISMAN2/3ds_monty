@@ -236,7 +236,7 @@ STATIC void mod_citrus_httpc_Request_attr(mp_obj_t self_in, qstr attr, mp_obj_t 
         dest[0] = mp_obj_new_int(status);
     } else if (!strcmp(name, qstr_str(MP_QSTR_response_status_code))) {
         u32 status = 0;
-        self->last_result = httpcGetResponseStatusCode(&self->context, &status, 0 /* delay: unused 1.1.0 */);
+        self->last_result = httpcGetResponseStatusCode(&self->context, &status);
 
         if (!R_SUCCEEDED(self->last_result)) {
             return;

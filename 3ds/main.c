@@ -70,7 +70,8 @@ STATIC bool fatal_error(bool restart) {
 
 STATIC int execute_from_lexer(mp_lexer_t *lex, mp_parse_input_kind_t kind, bool repl) {
     if (lex == NULL) {
-        init_console();
+        gfxInitDefault();
+        consoleInit(GFX_TOP, NULL);
         printf("MemoryError: lexer could not allocate memory\n");
         return ERR_MEMORY_ALLOC;
     }
@@ -106,7 +107,8 @@ STATIC int execute_from_lexer(mp_lexer_t *lex, mp_parse_input_kind_t kind, bool 
             }
         }
 
-        init_console();
+        gfxInitDefault();
+        consoleInit(GFX_TOP, NULL);
         mp_obj_print_exception(&mp_plat_print, MP_OBJ_FROM_PTR(nlr.ret_val));
         return ERR_PARSE;
     }
@@ -128,7 +130,8 @@ STATIC int do_file(const char *file) {
     struct stat st;
     stat(file, &st);
     if (!S_ISREG(st.st_mode)) {
-        init_console();
+        gfxInitDefault();
+        consoleInit(GFX_TOP, NULL);
         printf("Could not locate \"%s\"\n", file);
         return ERR_FILE_NOT_FOUND;
     }
@@ -164,7 +167,8 @@ STATIC int boot_file(const char *device, const char *boot_from, int argc, char *
     int count = read(init_fd, boot_filename, sizeof(filename));
 
     if (count <= 0) {
-        init_console();
+        gfxInitDefault();
+        consoleInit(GFX_TOP, NULL);
         printf("Couldn't read '%s'\nerrno: %d", boot_from_path, errno);
         close(init_fd);
         fatal_error(false);
